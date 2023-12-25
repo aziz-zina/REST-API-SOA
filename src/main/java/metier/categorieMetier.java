@@ -1,14 +1,14 @@
 package metier;
-import java.util.List;
 
-import model.CategorieDAO;
-import model.categorie;
+import DAO.categorieDAO;
+import java.util.List;
+import modele.categorie;
 
 public class categorieMetier {
-    private CategorieDAO categorieDAO;
+    private categorieDAO categorieDAO;
 
     public categorieMetier() {
-        categorieDAO = new CategorieDAO();
+        categorieDAO = new categorieDAO();
     }
 
     public void createCategorie(categorie categorie) {

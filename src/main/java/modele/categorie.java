@@ -1,4 +1,4 @@
-package model;
+package modele;
 
 public class categorie {
 	private int code;

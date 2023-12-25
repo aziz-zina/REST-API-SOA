@@ -1,32 +1,32 @@
 package metier;
+import DAO.produitDAO;
 import java.util.List;
+import modele.produit;
 
-import model.ProductDAO;
-import model.produit; 
 public class produitMetier {
-    private ProductDAO productDAO;
+    private produitDAO produitDAO;
 
     public produitMetier() {
-        productDAO = new ProductDAO();
+    	produitDAO = new produitDAO();
     }
 
     public void createProduit(produit produit) {
-        productDAO.createProduit(produit);
+    	produitDAO.createProduit(produit);
     }
 
     public List<produit> getAllProduits() {
-        return productDAO.getAllProduits();
+        return produitDAO.getAllProduits();
     }
 
     public produit getProduitById(int id) {
-        return productDAO.getProduitById(id);
+        return produitDAO.getProduitById(id);
     }
 
     public void updateProduit(produit produit) {
-        productDAO.updateProduit(produit);
+    	produitDAO.updateProduit(produit);
     }
 
     public void deleteProduit(int id) {
-        productDAO.deleteProduit(id);
+    	produitDAO.deleteProduit(id);
     }
 }

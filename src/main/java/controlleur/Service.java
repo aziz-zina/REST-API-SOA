@@ -2,8 +2,8 @@ package controlleur;
 
 import metier.categorieMetier;
 import metier.produitMetier;
-import model.categorie;
-import model.produit;
+import modele.categorie;
+import modele.produit;
 
 import java.util.List;
 

@@ -1,15 +1,17 @@
-package model;
+package DAO;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategorieDAO {
-    private static final String URL = "jdbc:mysql://localhost:3306/bd_produit";
+import modele.categorie;
+
+public class categorieDAO {
+    private static final String URL = "jdbc:mysql://localhost:3306/bd_magasin";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
-    public CategorieDAO() {
+    public categorieDAO() {
         try {
         	Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
