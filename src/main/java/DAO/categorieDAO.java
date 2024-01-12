@@ -23,10 +23,11 @@ public class categorieDAO {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    public void createCategorie(categorie categorie) {
+    public void createCategorie(categorie cat) {
+    	System.out.print(cat.toString());
         try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO categories (lib) VALUES (?)")) {
-            statement.setString(1, categorie.getLib());
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO categorie (lib) VALUES (?)")) {
+            statement.setString(1, cat.getLib());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -37,7 +38,7 @@ public class categorieDAO {
         List<categorie> categories = new ArrayList<>();
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM categories")) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM categorie")) {
             while (resultSet.next()) {
                 categorie categorie = new categorie();
                 categorie.setCode(resultSet.getInt("id"));
@@ -51,16 +52,43 @@ public class categorieDAO {
     }
 
     public categorie getCategorieById(int id) {
-        // Implement code to retrieve a category by ID
-        return null;
+    	categorie category = null;
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM categorie WHERE id = ?")) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                	category = new categorie();
+                	category.setCode(resultSet.getInt("id"));
+                	category.setLib(resultSet.getString("lib"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category;
     }
 
     public void updateCategorie(categorie categorie) {
-        // Implement code to update a category
+    	try (Connection connection = getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                        "UPDATE categorie SET lib = ? WHERE id = ?")) {
+               statement.setString(1, categorie.getLib());
+               statement.setInt(2, categorie.getCode()); 
+               statement.executeUpdate();
+           } catch (SQLException e) {
+               e.printStackTrace();
+           }
     }
 
     public void deleteCategorie(int id) {
-        // Implement code to delete a category by ID
+    	try (Connection connection = getConnection();
+                PreparedStatement statement = connection.prepareStatement("DELETE FROM categorie WHERE id = ?")) {
+               statement.setInt(1, id);
+               statement.executeUpdate();
+           } catch (SQLException e) {
+               e.printStackTrace();
+           }
     }
 }
 
